@@ -1,15 +1,15 @@
-const handleDomo = (e) => {
+const handleSkin = (e) => {
   e.preventDefault();
 
   $("#domoMessage").animate({width:'hide'},350);
 
-  if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoStrength").val() == '') {
+  if($("#skinName").val() == '' || $("#vBucks").val() == '' || $("#rarity").val() == '') {
     handleError("RAWR! All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function() {
-    loadDomosFromServer($("#token").val());
+  sendAjax('POST', $("#skinForm").attr("action"), $("#skinForm").serialize(), function() {
+    loadSkinsFromServer($("#token").val());
   });
 
   return false;
@@ -20,87 +20,87 @@ const handleDelete = (e) => {
     
   $("#domoMessage").animate({width:'hide'}, 350);
     
-  sendAjax('DELETE', $("#deleteDomo").attr("action"), $("#deleteDomo").serialize(), function(){
-    loadDomosFromServer($("token").val());
+  sendAjax('DELETE', $("#deleteSkin").attr("action"), $("#deleteSkin").serialize(), function(){
+    loadSkinsFromServer($("token").val());
   });
 };
 
-const DomoForm = (props) => {
+const SkinForm = (props) => {
   return (
-    <form id="domoForm"
-          onSubmit={handleDomo}
-          name="domoForm"
+    <form id="skinForm"
+          onSubmit={handleSkin}
+          name="skinForm"
           action="/maker"
           method="POST"
-          className="domoForm"
+          className="skinForm"
     >
-        <label htmlFor="name">Name: </label>
-        <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-        <label htmlFor="age">Age: </label>
-        <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-        <label htmlFor="strength">Strength: </label>
-        <input id="domoStrength" type="text" name="strength" placeholder="Domo Strength"/>
+        <label htmlFor="skinName">Skin Name: </label>
+        <input id="skinName" type="text" name="skinName" placeholder="Skin Name"/>
+        <label htmlFor="vBucks">V-Bucks: </label>
+        <input id="vBucks" type="text" name="vBucks" placeholder="V-Buck Cost"/>
+        <label htmlFor="rarity">Rarity: </label>
+        <input id="rarity" type="text" name="rarity" placeholder="Rarity"/>
         <input type="hidden" id="token" name="_csrf" value={props.csrf}/>
-        <input className="makeDomoSubmit" type="submit" value="Make Domo"/>
+        <input className="makeSkinSubmit" type="submit" value="Add Skin"/>
     </form>
   );
 };
 
-const DomoList = function(props) {
-  if(props.domos.length === 0) {
+const SkinList = function(props) {
+  if(props.skins.length === 0) {
     return (
-      <div className="domoList">
-        <h3 className="emptyDomo">No Domos yet</h3>
+      <div className="skinList">
+        <h3 className="emptySkin">No Skins yet</h3>
       </div>
     );
   }
 
-  const domoNodes = props.domos.map(function(domo) {
+  const skinNodes = props.skins.map(function(skin) {
     return (
-      <div key={domo._id} className="domo">
+      <div key={skin._id} className="skin">
         <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace"/>
-        <h3 className="domoName">Name: {domo.name}</h3>
-        <h3 className="domoAge">Age: {domo.age}</h3>
-        <h3 className="domoStrength">Strength: {domo.strength}</h3>
-        <form id="deleteDomo"
+        <h3 className="skinName">Skin Name: {skin.skinName}</h3>
+        <h3 className="vBuvks">V-Bucks: {skin.vBucks}</h3>
+        <h3 className="rarity">Rarity: {skin.rarity}</h3>
+        <form id="deleteSkin"
               onSubmit={handleDelete}
-              name="deleteDomo"
-              action="/deleteDomo"
+              name="deleteSkin"
+              action="/deleteSkin"
               method="DELETE"
         >
-            <input type="hidden" name="_id" value={domo._id}/>
+            <input type="hidden" name="_id" value={skin._id}/>
             <input type="hidden" id="token" name="_csrf" value={props.csrf}/>
-            <input className="makeDomoDelete" type="submit" value="Delete"/>
+            <input className="makeSkinDelete" type="submit" value="Delete"/>
         </form>
       </div>
     );
   });
 
   return (
-    <div className="domoList">
-      {domoNodes}
+    <div className="skinList">
+      {skinNodes}
     </div>
   );
 };
 
-const loadDomosFromServer = (csrf) => {
-  sendAjax('GET', '/getDomos', null, (data) => {
+const loadSkinsFromServer = (csrf) => {
+  sendAjax('GET', '/getSkins', null, (data) => {
     ReactDOM.render(
-      <DomoList domos={data.domos} csrf={csrf}/>, document.querySelector("#domos")
+      <SkinList skins={data.skins} csrf={csrf}/>, document.querySelector("#skins")
     );
   });
 };
 
 const setup = function(csrf) {
   ReactDOM.render(
-    <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+    <SkinForm csrf={csrf} />, document.querySelector("#makeSkin")
   );
 
   ReactDOM.render(
-    <DomoList domos={[]} csrf={csrf}/>, document.querySelector("#domos")
+    <SkinList skins={[]} csrf={csrf}/>, document.querySelector("#skins")
   );
 
-  loadDomosFromServer(csrf);
+  loadSkinsFromServer(csrf);
 };
 
 const getToken = () => {

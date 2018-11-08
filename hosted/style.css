@@ -47,7 +47,7 @@ nav:nth-child(1) {
     background-color: #66bdff;
 }
 
-.domoForm {
+.skinForm {
     border: 2px solid #338acc;
     height: 35px;
     width: 900px;
@@ -58,7 +58,7 @@ nav:nth-child(1) {
     border-top-right-radius: 4px;
 }
 
-.domoForm label {
+.skinForm label {
     display: inline-block;
     width: 75px;
     margin-left: 10px;
@@ -67,11 +67,11 @@ nav:nth-child(1) {
     color: white;
 }
 
-.domoForm input[type=text] {
+.skinForm input[type=text] {
     float:left;
 }
 
-.makeDomoSubmit {
+.makeSkinSubmit {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
@@ -81,16 +81,16 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
+.makeSkinSubmit:link, .makeSkinSubmit:visited, .makeSinSubmit:hover, .makeSkinSubmit:active {
     color: white;
 }
 
-.makeDomoSubmit:hover {
+.makeSkinSubmit:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
 }
 
-.makeDomoDelete {
+.makeSkinDelete {
     transition: background-color 0.4s ease;
     width: 100px;
     background-color: #55acee;
@@ -99,11 +99,11 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.makeDomoDelete:link, .makeDomoDelete:visited, .makeDomoDelete:hover, .makeDomoDelete:active {
+.makeSkinDelete:link, .makeSkinDelete:visited, .makeSkinDelete:hover, .makeSkinDelete:active {
     color: white;
 }
 
-.makeDomoDelete:hover {
+.makeSkinDelete:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
 }
@@ -196,7 +196,7 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#skin {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
@@ -207,7 +207,7 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
+#skins {
     width: 40%;
     min-width: 400px;
     border: 2px solid #55acee;
@@ -216,7 +216,7 @@ nav:nth-child(1) {
     margin-top: 100px;
 }
 
-.domo {
+.skin {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -229,7 +229,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.domo:hover {
+.skin:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
@@ -246,7 +246,7 @@ img.domoFace {
     float:left;
 }
 
-h3.emptyDomo {
+h3.emptySkin {
     width: 400px;
     font-size: 1.5em;
     margin: 0 auto;
@@ -254,7 +254,7 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
+h3.skinName {
     float:left;
     width: 200px;
     font-weight: bold;
@@ -262,7 +262,7 @@ h3.domoName {
     font-size: 1.5em;
 }
 
-h3.domoAge {
+h3.vBucks {
     float:right;
     text-align: center;
     width: 100px;
@@ -271,7 +271,7 @@ h3.domoAge {
     font-size: 1.5em;
 }
 
-h3.domoStrength {
+h3.rarity {
     float: left;
     text-align: center;
     width: 100px;
@@ -280,15 +280,15 @@ h3.domoStrength {
     font-size: 1.5em;
 }
 
-#deleteDomo {
+#deleteSkin {
     position: absolute;
     margin-top: 80px;
 }
 
-.domo:first-child {
+.skin:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.skin:last-child {
     margin-bottom:10px;
 }
