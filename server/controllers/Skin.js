@@ -12,6 +12,17 @@ const makerPage = (req, res) => {
   });
 };
 
+const skinPage = (req, res) => {
+  Skin.SkinModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+
+    return res.render('skinData', { csrfToken: req.csrfToken(), skins: docs });
+  });
+};
+
 const makeSkin = (req, res) => {
   if (!req.body.skinName || !req.body.vBucks || !req.body.rarity) {
     return res.status(400).json({ error: 'Skin name, V-buck amount, and rarity are required' });
@@ -72,6 +83,7 @@ const deleteSkin = (request, response) => {
 };
 
 module.exports.makerPage = makerPage;
-module.exports.getSkins = getSkins;
+module.exports.skinPage = skinPage;
 module.exports.make = makeSkin;
+module.exports.getSkins = getSkins;
 module.exports.deleteSkin = deleteSkin;

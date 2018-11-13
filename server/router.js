@@ -13,6 +13,7 @@ const router = (app) => {
   app.post('/maker', mid.requiresLogin, controllers.Skin.make);
   app.delete('/deleteSkin', mid.requiresLogin, controllers.Skin.deleteSkin);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/skins', mid.requiresLogin, controllers.Skin.skinPage);
 };
 
 module.exports = router;
