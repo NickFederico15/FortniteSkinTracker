@@ -12,8 +12,10 @@ const router = (app) => {
   app.get('/maker', mid.requiresLogin, controllers.Skin.makerPage);
   app.post('/maker', mid.requiresLogin, controllers.Skin.make);
   app.delete('/deleteSkin', mid.requiresLogin, controllers.Skin.deleteSkin);
-  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/skins', mid.requiresLogin, controllers.Skin.skinPage);
+  app.get('/info', mid.requiresSecure, controllers.Skin.infoPage);
+  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/*', mid.requiresSecure, mid.requiresSecure, controllers.Account.notFoundPage);
 };
 
 module.exports = router;

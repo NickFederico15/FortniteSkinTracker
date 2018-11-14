@@ -115,5 +115,6 @@ const getToken = () => {
 };
 
 $(document).ready(function() {
+  $('.collapsible').collapsible();
   getToken();
 });

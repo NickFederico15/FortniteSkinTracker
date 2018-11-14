@@ -82,8 +82,13 @@ const deleteSkin = (request, response) => {
   });
 };
 
+const infoPage = (request, response) => {
+  response.render('info', { csrfToken: request.csrfToken() });
+};
+
 module.exports.makerPage = makerPage;
 module.exports.skinPage = skinPage;
 module.exports.make = makeSkin;
 module.exports.getSkins = getSkins;
 module.exports.deleteSkin = deleteSkin;
+module.exports.infoPage = infoPage;
