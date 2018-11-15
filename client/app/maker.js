@@ -4,7 +4,7 @@ const handleSkin = (e) => {
   $("#domoMessage").animate({width:'hide'},350);
 
   if($("#skinName").val() == '' || $("#vBucks").val() == '' || $("#rarity").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
     return false;
   }
 
@@ -60,7 +60,7 @@ const SkinList = function(props) {
       <div key={skin._id} className="skin">
         <img src="/assets/img/default.png" alt="default skin" className="default"/>
         <h3 className="skinName">Skin Name: {skin.skinName}</h3>
-        <h3 className="vBuvks">V-Bucks: {skin.vBucks}</h3>
+        <h3 className="vBucks">V-Bucks: {skin.vBucks}</h3>
         <h3 className="rarity">Rarity: {skin.rarity}</h3>
         <form id="deleteSkin"
               onSubmit={handleDelete}
