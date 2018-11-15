@@ -68,7 +68,7 @@ var SkinList = function SkinList(props) {
     return React.createElement(
       "div",
       { key: skin._id, className: "skin" },
-      React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "domo face", className: "domoFace" }),
+      React.createElement("img", { src: "/assets/img/default.png", alt: "default skin", className: "default" }),
       React.createElement(
         "h3",
         { className: "skinName" },

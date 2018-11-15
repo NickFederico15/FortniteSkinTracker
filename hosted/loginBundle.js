@@ -1,12 +1,37 @@
 "use strict";
 
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#domoMessage").animate({ width: 'toggle' }, 350);
+};
+
+var redirect = function redirect(response) {
+  $("#domoMessage").animate({ width: 'hide' }, 350);
+  window.location = response.redirect;
+};
+
+var sendAjax = function sendAjax(type, action, data, success) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
 
   $("#domoMessage").animate({ width: "hide" }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '') {
-    handleError("RAWR! Username or password is empty");
+    handleError("Username or password is empty");
     return false;
   }
 
@@ -23,12 +48,12 @@ var handleSignup = function handleSignup(e) {
   $("#domoMessage").animate({ width: 'hide' }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-    handleError("RAWR! All fields are required!");
+    handleError("All fields are required!");
     return false;
   }
 
   if ($("#pass").val() !== $("#pass2").val()) {
-    handleError("RAWR! Passwords do not match!");
+    handleError("Passwords do not match!");
     return false;
   }
 
@@ -48,19 +73,23 @@ var LoginWindow = function LoginWindow(props) {
       className: "mainForm"
     },
     React.createElement(
-      "label",
-      { htmlFor: "username" },
-      "Username: "
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "user", type: "text", name: "username"}),
+      React.createElement("label", { htmlFor: "user" }, "Username"),
     ),
-    React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "username" }),
     React.createElement(
-      "label",
-      { htmlFor: "pass" },
-      "Password: "
+        "div", 
+        { className: "input-field col s6"}, 
+        React.createElement("input", { id: "pass", type: "password", name: "pass"}),
+        React.createElement("label", { htmlFor: "pass" }, "Password"),
+        React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
     ),
-    React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "password" }),
-    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
-    React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign in" })
+    React.createElement(
+        "div", 
+        { className: "container center-align"}, 
+        React.createElement("input", { className: "btn purple lighten-2", type: "submit", value: "Sign in" }),
+    ),
   );
 };
 
@@ -75,25 +104,29 @@ var SignupWindow = function SignupWindow(props) {
       className: "mainForm"
     },
     React.createElement(
-      "label",
-      { htmlFor: "username" },
-      "Username: "
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "user", type: "text", name: "username"}),
+      React.createElement("label", { htmlFor: "user" }, "Username"),
     ),
-    React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "username" }),
     React.createElement(
-      "label",
-      { htmlFor: "pass" },
-      "Password: "
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "pass", type: "password", name: "pass"}),
+      React.createElement("label", { htmlFor: "pass" }, "Password"),
     ),
-    React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "password" }),
     React.createElement(
-      "label",
-      { htmlFor: "pass2" },
-      "Password: "
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "pass2", type: "password", name: "pass2"}),
+      React.createElement("label", { htmlFor: "pass2" }, "Retype Password"),
+      React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
     ),
-    React.createElement("input", { id: "pass2", type: "password", name: "pass2", placeholder: "retype password" }),
-    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
-    React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign Up" })
+    React.createElement(
+        "div", 
+        { className: "container center-align"}, 
+        React.createElement("input", { className: "btn purple lighten-2", type: "submit", value: "Sign Up" }),
+    ),
   );
 };
 
@@ -133,29 +166,3 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
-"use strict";
-
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#domoMessage").animate({ width: 'toggle' }, 350);
-};
-
-var redirect = function redirect(response) {
-  $("#domoMessage").animate({ width: 'hide' }, 350);
-  window.location = response.redirect;
-};
-
-var sendAjax = function sendAjax(type, action, data, success) {
-  $.ajax({
-    cache: false,
-    type: type,
-    url: action,
-    data: data,
-    dataType: "json",
-    success: success,
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};

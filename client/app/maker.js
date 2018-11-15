@@ -58,7 +58,7 @@ const SkinList = function(props) {
   const skinNodes = props.skins.map(function(skin) {
     return (
       <div key={skin._id} className="skin">
-        <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace"/>
+        <img src="/assets/img/default.png" alt="default skin" className="default"/>
         <h3 className="skinName">Skin Name: {skin.skinName}</h3>
         <h3 className="vBuvks">V-Bucks: {skin.vBucks}</h3>
         <h3 className="rarity">Rarity: {skin.rarity}</h3>

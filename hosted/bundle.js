@@ -53,25 +53,29 @@ var SkinForm = function SkinForm(props) {
       className: "skinForm"
     },
     React.createElement(
-      "label",
-      { htmlFor: "skinName" },
-      "Skin Name: "
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "skinName", type: "text", name: "skinName"}),
+      React.createElement("label", { htmlFor: "skinName" }, "Skin Name"),  
     ),
-    React.createElement("input", { id: "skinName", type: "text", name: "skinName", placeholder: "Skin Name" }),
     React.createElement(
-      "label",
-      { htmlFor: "vBucks" },
-      "V-Bucks: "
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "vBucks", type: "number", name: "vBucks", min: "0", max: "15000", step: "100"}),
+      React.createElement("label", { htmlFor: "vBucks" }, "V-Bucks"),
     ),
-    React.createElement("input", { id: "vBucks", type: "text", name: "vBucks", placeholder: "V-Buck Cost" }),
     React.createElement(
-      "label",
-      { htmlFor: "rarity" },
-      "Rarity:"
+      "div", 
+      { className: "input-field col s6"},
+      React.createElement("input", { id: "rarity", type: "text", name: "rarity"}),
+      React.createElement("label", { htmlFor: "rarity" }, "Rarity"),
     ),
-    React.createElement("input", { id: "rarity", type: "text", name: "rarity", placeholder: "Skin Rarity" }),
     React.createElement("input", { type: "hidden", id: "token", name: "_csrf", value: props.csrf }),
-    React.createElement("input", { className: "makeSkinSubmit", type: "submit", value: "Add Skin" })
+    React.createElement(
+        "div", 
+        { className: "container center-align"},
+        React.createElement("input", { className: "btn purple lighten-2", type: "submit", value: "Add Skin" })
+    ),
   );
 };
 
