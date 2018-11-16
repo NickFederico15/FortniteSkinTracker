@@ -1,35 +1,42 @@
+// handles the user logging in
 const handleLogin = (e) => {
   e.preventDefault();
 
-  $("#domoMessage").animate({width:"hide"},350);
-
+  // checks if username and password are present
   if($("#user").val() == '' || $("#pass").val() == '') {
-    handleError("Username or password is empty");
+    M.toast({html: 'Username or Password is empty!', displayLength: 2500});
     return false;
   }
 
   console.log($("input[name=_csrf]").val());
     
+  M.toast({html: 'Login Success!', displayLength: 2500});
+   
+  // sends request to login
   sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
   return false;
 };
 
+// handles the user signing up
 const handleSignup = (e) => {
   e.preventDefault();
 
-  $("#domoMessage").animate({width:'hide'},350);
-
+  // checks if all fields are filled out
   if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-    handleError("All fields are required!");
+    M.toast({html: 'All fields are required!', displayLength: 2500});
     return false;
   }
 
+  // makes sure both passords are the same
   if($("#pass").val() !== $("#pass2").val()) {
-    handleError("Passwords do not match!");
+    M.toast({html: 'Passwords do not match!', displayLength: 2500});
     return false;
   }
+    
+  M.toast({html: 'Account Created!', displayLength: 2500});
 
+  // sends request to create the account
   sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
 
   return false;
@@ -89,6 +96,7 @@ const createSignupWindow = (csrf) => {
   );
 };
 
+// sets up event listeners for the signup and login buttons
 const setup = (csrf) => {
   const loginButton = document.querySelector("#loginButton");
   const signupButton = document.querySelector("#signupButton");

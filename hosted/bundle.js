@@ -1,15 +1,15 @@
 "use strict";
 
+// helper method to handle errors
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#domoMessage").animate({ width: 'hide' }, 350);
   window.location = response.redirect;
 };
 
+// ajax request
 var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,
@@ -25,23 +25,26 @@ var sendAjax = function sendAjax(type, action, data, success) {
   });
 };
 
+// handles the user adding skin
 var handleSkin = function handleSkin(e) {
   e.preventDefault();
 
-  $("#domoMessage").animate({ width: 'hide' }, 350);
-
+  // makes sure all fields are filled out
   if ($("#skinName").val() == '' || $("#vBucks").val() == '' || $("#rarity").val() == '') {
-    handleError("All fields are required");
+    M.toast({html: 'All fields are required!', displayLength: 2500});
     return false;
   }
 
+  // sends request to add skin
   sendAjax('POST', $("#skinForm").attr("action"), $("#skinForm").serialize(), function () {
+    M.toast({html: 'Skin Added', displayLength: 2500})
     loadSkinsFromServer($("token").val());
   });
 
   return false;
 };
 
+// React skin form
 var SkinForm = function SkinForm(props) {
   return React.createElement(
     "form",

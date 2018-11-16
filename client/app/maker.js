@@ -1,25 +1,29 @@
+// adds a skin
 const handleSkin = (e) => {
   e.preventDefault();
 
-  $("#domoMessage").animate({width:'hide'},350);
-
+  // checks if all fields are filled in
   if($("#skinName").val() == '' || $("#vBucks").val() == '' || $("#rarity").val() == '') {
-    handleError("All fields are required");
+    M.toast({html: 'All fields are required!'});
     return false;
   }
 
+  // sends request
   sendAjax('POST', $("#skinForm").attr("action"), $("#skinForm").serialize(), function() {
+    M.toast({html: 'Skin Added', displayLength: 2500});
     loadSkinsFromServer($("#token").val());
   });
 
   return false;
 };
 
+// deletes a skin from the list
 const handleDelete = (e) => {
   e.preventDefault();
     
-  $("#domoMessage").animate({width:'hide'}, 350);
-    
+  M.toast({html: 'Skin Deleted!', displayLength: 2500});
+  
+  // sends the delete request
   sendAjax('DELETE', $("#deleteSkin").attr("action"), $("#deleteSkin").serialize(), function(){
     loadSkinsFromServer($("token").val());
   });
@@ -46,6 +50,7 @@ const SkinForm = (props) => {
   );
 };
 
+// checks if skin list is empty
 const SkinList = function(props) {
   if(props.skins.length === 0) {
     return (
@@ -55,6 +60,7 @@ const SkinList = function(props) {
     );
   }
 
+  // creates skin cards
   const skinNodes = props.skins.map(function(skin) {
     return (
       <div key={skin._id} className="skin">
@@ -83,6 +89,7 @@ const SkinList = function(props) {
   );
 };
 
+// sends a request to get the user's skins
 const loadSkinsFromServer = (csrf) => {
   sendAjax('GET', '/getSkins', null, (data) => {
     ReactDOM.render(
@@ -91,6 +98,7 @@ const loadSkinsFromServer = (csrf) => {
   });
 };
 
+// sets up React renders
 const setup = function(csrf) {
   ReactDOM.render(
     <SkinForm csrf={csrf} />, document.querySelector("#makeSkin")

@@ -12,8 +12,8 @@ const RedisStore = require('connect-redis')(session);
 const url = require('url');
 const csrf = require('csurf');
 
+// connections
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
-
 const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/FortniteSkinTracker';
 
 mongoose.connect(dbURL, (err) => {
